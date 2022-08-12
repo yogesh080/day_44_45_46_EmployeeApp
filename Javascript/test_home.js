@@ -7,12 +7,12 @@ createInnerHtml = () =>{
     const headerHtml = "<th></th><th>Name</th><th>Gender</th><th>Department</th>"+
                         "<th>Salary</th><th>Start Date</th><th>Actions</th>"
 
-    let empPayrollData = createEmplooyeePayrollJSON()[2];
-    const innerHtml = `${headerHtml}
-    
-    <tr>
-                
-              </tr>
+    // let empPayrollData = createEmplooyeePayrollJSON();
+    let innerHtml = `${headerHtml}`;
+    let empPayrollList = createEmplooyeePayrollJSON()
+    for (const empPayrollData of empPayrollList){
+        innerHtml =`${innerHtml}
+
               <tr>
                 <td><img class="profile" alt="" src="${empPayrollData._profilePic}"></td>
                 <td>${empPayrollData._name}</td>
@@ -25,6 +25,7 @@ createInnerHtml = () =>{
                   <img id="1" onclick= "update(this)" alt="edit" src="./asserts/icons8-edit-30.png"></td>
               </tr>
               `;
+            }
               document.querySelector('#table-display').innerHTML = innerHtml;
 }
 
