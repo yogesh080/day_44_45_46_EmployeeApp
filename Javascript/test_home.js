@@ -1,9 +1,18 @@
+let empPayrollList
 window.addEventListener('DOMContentLoaded',(event) =>{
+    empPayrollList = getEmployeePayrollDataFromStorage();
+    document.querySelector(".emp-count").textContent = empPayrollList.length;
+    
     createInnerHtml();
 });
 
-createInnerHtml = () =>{
+const getEmployeePayrollDataFromStorage = () => {
+    return localStorage.getItem('EmployeePayrollList')?
+                        JSON.parse(localStorage.getItem('EmployeePayrollList')) : []
+}
 
+const createInnerHtml = () =>{
+    // if (empPayrollList.length == 0) return;
     const headerHtml = "<th></th><th>Name</th><th>Gender</th><th>Department</th>"+
                         "<th>Salary</th><th>Start Date</th><th>Actions</th>"
 
@@ -21,8 +30,10 @@ createInnerHtml = () =>{
 
                 <td>${empPayrollData._salary}</td>
                 <td>${empPayrollData._startDate}</td>
-                <td><img id="1" onclick= "remove(this)" alt="delete" src="./asserts/icons8-delete-30.png">
-                  <img id="1" onclick= "update(this)" alt="edit" src="./asserts/icons8-edit-30.png"></td>
+                <td>
+                <img name="${empPayrollData._id}" onclick= "remove(this)" alt="delete" src="./asserts/icons8-delete-30.png">
+                <img name="${empPayrollData._id}" onclick= "update(this)" alt="edit" src="./asserts/icons8-edit-30.png">
+                </td>
               </tr>
               `;
             }
